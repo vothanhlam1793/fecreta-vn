@@ -2,13 +2,13 @@
     <div class="row mt-2 mb-2">
         <div class="col" v-if="header.data">
             <div class="row">
-                <div class="col-2 p-2">
+                <div class="col-12 col-md-2 p-2">
                     <Logo :url="url_be + header.data.attributes.logo.data.attributes.url"/>
                 </div>
-                <div class="col-7 p-2">
+                <div class="col-12 col-md-7 p-2">
                     <Search />
                 </div>
-                <div class="col-3 p-2">
+                <div class="col-3 d-none d-md-block p-2">
                     <Info :content="header.data.attributes.info" />
                 </div>
             </div>

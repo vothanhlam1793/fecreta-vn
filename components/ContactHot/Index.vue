@@ -2,26 +2,62 @@
     <div class="contact-hot p-2 rounded" 
         v-if="enablePage && show"
     >
-        <div
-            v-for="contact in footer.data.attributes.contactHot"
-            class="my-2 text-left"
-            @click="openContactModal"
-            :key="contact.id"
-        >
-        <a :href="'tel:' + contact.phoneNumber">
-            <b-alert
-                show
-                :variant="contact.variant ? contact.variant : info"
+        <div v-if="isMobile">
+            <div class=""
+                v-if="mobileShow == false"
             >
-                <b-icon
-                    icon="telephone-fill" 
-                    :variant="contact.variant ? contact.variant : info"
-                    font-scale="1"
+                <div
+                    v-for="contact in footer.data.attributes.contactHot"
+                    class="my-2 text-left"
+                    @click="openContactModal"
+                    :key="contact.id"
+                >
+                <a :href="'tel:' + contact.phoneNumber">
+                    <b-alert
+                        show
+                        :variant="contact.variant ? contact.variant : info"
+                    >
+                        <b-icon
+                            icon="telephone-fill" 
+                            :variant="contact.variant ? contact.variant : info"
+                            font-scale="1"
+                            animation="fade"
+                        />
+                        {{ contact.name }}
+                        </b-alert>
+                        </a>
+                </div>
+            </div>
+            <div class="contact-hot-mobile" @click="mbshow()">
+                <div style="font-size: 3rem;">
+                    <b-icon icon="telephone-fill" class="rounded-circle bg-danger p-2" variant="light"
                     animation="fade"
-                />
-                {{ contact.name }}
-                </b-alert>
-                </a>
+                    ></b-icon>
+                </div>
+            </div>
+        </div>
+        <div v-else>
+            <div
+                    v-for="contact in footer.data.attributes.contactHot"
+                    class="my-2 text-left"
+                    @click="openContactModal"
+                    :key="contact.id"
+                >
+                <a :href="'tel:' + contact.phoneNumber">
+                    <b-alert
+                        show
+                        :variant="contact.variant ? contact.variant : info"
+                    >
+                        <b-icon
+                            icon="telephone-fill" 
+                            :variant="contact.variant ? contact.variant : info"
+                            font-scale="1"
+                            animation="fade"
+                        />
+                        {{ contact.name }}
+                        </b-alert>
+                        </a>
+                </div>
         </div>
     </div>    
 </template>
@@ -33,6 +69,10 @@ export default {
         this.$nuxt.$on('enableContactHotChanged', (state) => {
             that.enablePage = state;
         });
+        if(process.client){
+            this.checkMobile();
+            window.addEventListener('resize', this.checkMobile);
+        }
     },
     watch: {
         footer(){
@@ -43,13 +83,22 @@ export default {
     data() {
         return {
             enablePage: true, // Cai nay danh cho page dieu khien hot, neu muon tat
-            show: true
+            show: true,
+            isMobile: false,
+            mobileWidth: 768,
+            mobileShow: true,
         }
     },
     methods: {
+        mbshow(){
+            this.mobileShow = !this.mobileShow;
+        },
         openContactModal(){
             // console.log("Hello World");
-        }
+        },
+        checkMobile() {
+            this.isMobile = window.innerWidth <= 768;
+        },
     },
     apollo: {
         footer: {
@@ -78,8 +127,16 @@ export default {
 .contact-hot {
     position: fixed;
     width: 10em;
-    bottom: 10px;
+    bottom: 50px;
     right: 10px;
+    z-index: 10;
+}
+
+.contact-hot-mobile {
+    position: fixed;
+    width: 5em;
+    bottom: 3px;
+    right: 2px;
     z-index: 10;
 }
 </style>

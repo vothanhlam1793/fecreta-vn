@@ -4,7 +4,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   ssr: true,
   head: {
-    title: 'demo',
+    title: 'CRETA SHOP',
     htmlAttrs: {
       lang: 'en'
     },

@@ -6,7 +6,7 @@
         <div class="col-12 col-md-9">
             <div class="row">
                 <div class="col-12 col-lg-6">
-                    <ImageProduct :images="products.data[0].attributes.image" :urlBackend="url_be" />
+                    <ImageProduct :images="products.data[0].attributes.image.data.length > 0 ? products.data[0].attributes.image : {data: [products.data[0].attributes.imagePresent.data]} " :urlBackend="url_be" />
                 </div>
                 <div class="col-12 col-lg-6">
                     <h4>{{ products.data[0].attributes.name }}</h4>
@@ -56,6 +56,11 @@ export default {
     components: {
         ImageProduct,
         SideBar,
+    },
+    watch: {
+        products(){
+            console.log(this.products);
+        }
     },
     methods: {
         checkPromotion(product){

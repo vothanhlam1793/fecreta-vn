@@ -70,6 +70,7 @@ export default {
                             data {
                                 attributes {
                                 code
+                                name
                                 imagePresent {
                                     data {
                                     attributes {

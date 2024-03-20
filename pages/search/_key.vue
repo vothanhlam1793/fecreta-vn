@@ -1,17 +1,29 @@
 <template>
     <b-row>
-        <b-col v-if="products.length > 0">
+        <b-col v-if="$apolloData.queries.searchPage.loading == false"
+            class="col-12 col-lg-3"
+        >
+            <SideBar :id="page.attributes.sidemenu.data.id"/>
+
+        </b-col>
+        <b-col v-if="products.length > 0"
+            class="col-12 col-lg-9"    
+        >
             <TableProduct 
                 :products="products"
                 :col="4"
             />
         </b-col>
-        <b-col v-else>
+        <b-col v-else
+            class="col-12 col-lg-9"
+        >
             <p>Không tìm thấy sản phẩm</p>
         </b-col>
     </b-row>
 </template>
 <script>
+import gql from 'graphql-tag';
+import SideBar from '~/components/Common/Sidebar.vue';
 import TableProduct from '~/components/Product/TableMilliSearch/Index.vue'
 export default {
     head(){
@@ -21,10 +33,36 @@ export default {
             ],
         }
     },
+    apollo: {
+        searchPage: {
+            query: gql`
+            query Query {
+                searchPage {
+                    data {
+                    id
+                    attributes {
+                        sidemenu {
+                        data {
+                            id
+                        }
+                        }
+                        title
+                    }
+                    }
+                }
+            }
+            `
+        }
+    },
     components: {
-        TableProduct
+        TableProduct, SideBar
     },
     computed: {
+        page(){
+            console.log(this);
+            // return 2;
+            return this.$apolloData.data.searchPage.data;
+        },
         search_host(){
             return process.env.SEARCH_HOST;
         },

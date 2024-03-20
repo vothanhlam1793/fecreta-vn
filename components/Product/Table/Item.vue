@@ -18,6 +18,7 @@
                 ></b-img>
             </div>
             <div class="product-info">
+
                 <a :href="`/products/${product.attributes.slug}`">{{ product.attributes.name }}</a>
             </div>
             <p>{{ product.attributes.price != null ? product.attributes.price.toLocaleString('vi-VN', {
