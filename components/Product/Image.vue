@@ -49,7 +49,6 @@ export default {
         }
     },
     mounted() {
-        // Thêm các đoạn mã script vào sau thẻ <body> khi component được mount
         this.addScripts();
     },
     methods: {
@@ -78,7 +77,9 @@ export default {
         },
         scriptRunning() {
             var that = this;
+            // console.log("HERE 1");
             (function ($) {
+                // console.log("HERE 2");
                 $(document).ready(function () {
                     $('.xzoom, .xzoom-gallery').xzoom({ zoomWidth: 400, title: true, tint: '#333', Xoffset: 15 });
                     $('.xzoom2, .xzoom-gallery2').xzoom({ position: '#xzoom2-id', tint: '#ffa200' });

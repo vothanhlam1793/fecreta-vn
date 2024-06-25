@@ -72,7 +72,7 @@ export default {
   },
   head() {
     return {
-      title: "CRETA SHOP",
+      title: "CRETA - Trang chủ",
     }
   },
   components: {

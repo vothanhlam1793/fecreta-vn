@@ -1,6 +1,8 @@
 <template>
     <b-row> 
-        <b-col>
+        <b-col v-if="show">
+            <div v-html="contact.data.attributes.hello"></div>
+            <hr>
             <GmapMap
                 :center="{lat:contact.data.attributes.lat, lng:contact.data.attributes.long}"
                 :zoom="contact.data.attributes.zoom"
@@ -25,24 +27,35 @@
 <script>
 import gql from 'graphql-tag';
 export default {
+    head() {
+        return {
+            title: "CRETA - Liên hệ",
+        }
+    },
     mounted(){
         this.controlNotify();
     },
-    updated(){
-        // this.markerPosition = {
-        //     lat: this.contact.data.attributes.lat,
-        //     lng: this.contact.data.attributes.lng,
-        // };
-        // this.center = {
-        //     lat: this.contact.data.attributes.lat,
-        //     lng: this.contact.data.attributes.lng,
-        // }
+    watch: {
+        contact(){
+            if(this.contact.data){
+                this.markerPosition = {
+                    lat: this.contact.data.attributes.lat,
+                    lng: this.contact.data.attributes.long,
+                };
+                this.center = {
+                    lat: this.contact.data.attributes.lat,
+                    lng: this.contact.data.attributes.long,
+                }
+                this.show = true;
+            }
+        }
     },
     data() {
         return {
             center: { lat: 10.7886908, lng: 106.6487455 }, // Tọa độ trung tâm (San Francisco, CA)
             zoom: 13,
             markerPosition: { lat: 10.7886908, lng: 106.6487455 }, // Tọa độ mặc định cho marker
+            show: false,
         };
     },
     methods: {
@@ -71,6 +84,7 @@ export default {
                 contact {
                     data {
                         attributes {
+                            hello
                             lat
                             long
                             title

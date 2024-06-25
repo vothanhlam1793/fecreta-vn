@@ -1,6 +1,7 @@
 <template>
     <div class="row mb-2" v-if="menu">
         <div class="col">
+            
             <b-button @click="toggleShow()" variant="primary" class="w-100 d-flex justify-content-between align-items-center">
                 <span class="text-left">{{ menu.menu.data.attributes.title }}</span>
                 <b-icon :icon="show ? 'chevron-up' : 'chevron-down'"></b-icon>

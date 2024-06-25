@@ -9,6 +9,11 @@
 import gql from 'graphql-tag';
 import PageTemplate from '~/components/Content/Page.vue';
 export default {
+    head() {
+        return {
+            title: "CRETA - Bảo mật thông tin",
+        }
+    },
     components: {
         PageTemplate,
     },

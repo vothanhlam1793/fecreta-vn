@@ -3,16 +3,18 @@
   <b-row no-gutters>
     <!-- Hình ảnh bên trái -->
     <b-col class="col-3">
-      <b-img :src="url_be + blog.attributes.imagePresent.data.attributes.url" alt="Image" fluid
+      <div>
+        <b-img :src="blog.attributes.imagePresent.data ? url_be + blog.attributes.imagePresent.data.attributes.url : url_be + url_no_image" alt="Image" fluid
         class="image-height"
       ></b-img>
+      </div>
     </b-col>
 
     <!-- Nội dung (content) bên phải -->
     <b-col class="col-9">
       <b-card-body class="short-description">
+        <h4>{{ blog.attributes.title }}</h4>
         <div v-html="blog.attributes.shortDescription ">
-
         </div>
       </b-card-body>
       <b-card-footer class="text-right">
@@ -33,6 +35,9 @@ export default {
     computed: {
         url_be(){
             return process.env.BACKEND_URL_IMAGE;
+        },
+        url_no_image() {
+            return process.env.NO_IMAGE;
         }
     },
     props: ['blog'],

@@ -17,6 +17,11 @@
 import gql from 'graphql-tag';
 import ListBlog from '~/components/Blog/List/Index.vue'
 export default {
+    head() {
+        return {
+            title: "CRETA - Bài biết - Blogs - Công nghệ",
+        }
+    },
     components: {
         ListBlog
     },

@@ -17,6 +17,28 @@ export default {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/creta.ico' },
       { rel: 'stylesheet', href: '/css/ckeditor.css' },
+    ],
+    script: [
+        {
+            src: "https://www.googletagmanager.com/gtag/js?id=G-NRK1H287KC",
+            async: true,
+        },
+        {
+            src: "/js/ga.js",
+        },
+        // {
+        //     src: "/js/jquery-2.1.1.js",
+        // },
+        // {
+        //     src: "/js/xzoom.min.js",
+        //     // onload: "scripRunning()"
+        // },
+        // {
+        //     src: "/js/hammer.min.js",
+        // },
+        // {
+        //     src: "/js/foundation.min.js",
+        // }
     ]
   },
 
@@ -35,7 +57,8 @@ export default {
     '~plugins/axios',
     '~plugins/blog',
     '~/plugins/googleMaps.js',
-    '~/plugins/support.js'
+    '~/plugins/support.js',
+    '~/plugins/product.js'
 
     // { src: '~/plugins/bootstrap-css.js', mode: 'client' },
     // { src: '~/plugins/bootstrap-js.js', mode: 'client' },
@@ -48,7 +71,9 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
   ],
-
+  // googleAnalytics: {
+  //   id: 'G-NRK1H287KC'
+  // },
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/bootstrap
@@ -56,6 +81,7 @@ export default {
     '@nuxtjs/apollo',
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    // '@nuxtjs/google-analytics'
   ],
   bootstrapVue: {
     icons: true

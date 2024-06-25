@@ -1,18 +1,17 @@
 <template>
     <div class="contact-hot p-2 rounded" 
-        v-if="enablePage && show"
+        v-show="enablePage && show"
     >
-        <div v-if="isMobile">
+        <div v-show="isMobile">
             <div class=""
-                v-if="mobileShow == false"
+                v-show="mobileShow == false"
             >
-                <div
+                <a 
                     v-for="contact in footer.data.attributes.contactHot"
                     class="my-2 text-left"
                     @click="openContactModal"
                     :key="contact.id"
-                >
-                <a :href="'tel:' + contact.phoneNumber">
+                    :href="'tel:' + contact.phoneNumber">
                     <b-alert
                         show
                         :variant="contact.variant ? contact.variant : info"
@@ -25,8 +24,7 @@
                         />
                         {{ contact.name }}
                         </b-alert>
-                        </a>
-                </div>
+                </a>
             </div>
             <div class="contact-hot-mobile" @click="mbshow()">
                 <div style="font-size: 3rem;">
@@ -36,14 +34,13 @@
                 </div>
             </div>
         </div>
-        <div v-else>
-            <div
+        <div v-show="isMobile == false">
+                <a :href="'tel:' + contact.phoneNumber"
                     v-for="contact in footer.data.attributes.contactHot"
                     class="my-2 text-left"
                     @click="openContactModal"
                     :key="contact.id"
                 >
-                <a :href="'tel:' + contact.phoneNumber">
                     <b-alert
                         show
                         :variant="contact.variant ? contact.variant : info"
@@ -56,19 +53,21 @@
                         />
                         {{ contact.name }}
                         </b-alert>
-                        </a>
-                </div>
+                </a>
         </div>
-    </div>    
+    </div> 
 </template>
 <script>
 import gql from 'graphql-tag';
 export default {
     created(){
         var that = this;
+
+        // Đoạn này dùng để tạo emit/on trên toàn nuxt app
         this.$nuxt.$on('enableContactHotChanged', (state) => {
             that.enablePage = state;
         });
+
         if(process.client){
             this.checkMobile();
             window.addEventListener('resize', this.checkMobile);

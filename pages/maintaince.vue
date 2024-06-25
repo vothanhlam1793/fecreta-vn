@@ -12,6 +12,11 @@ export default {
     components: {
         PageTemplate,
     },
+    head() {
+        return {
+        title: "CRETA - Bảo hành",
+        }
+    },
     apollo : {
         blogs: {
             query: gql`

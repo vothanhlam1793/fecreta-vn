@@ -1,6 +1,6 @@
 <template>
     <b-row>
-        <b-col>
+        <b-col v-if="show">
             <ItemBlog 
                 v-for="blog in blogs.data"
                 :blog="blog"
@@ -25,17 +25,20 @@ export default {
     },
     data(){
         return {
-            blogs: []
+            blogs: [],
+            show: false
         }
     },
     methods: {
         async getBlogs(){
             this.blogs = await this.$getBlogs(this.category);
-
+            this.show = true;
         }
     },
     created(){
-        this.getBlogs();
+        if(process.client){
+            this.getBlogs();
+        }
     }
 }
 </script>
