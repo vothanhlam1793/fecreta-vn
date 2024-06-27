@@ -1,14 +1,14 @@
 <template>
     <div>
-        <h1>Hello World</h1>
-        <p>{{ count }}</p>
+        <CalculateHdd />
     </div>
 </template>
 
 <script>
-import TableProduct from '~/components/TableProduct/Index.vue';
+import CalculateHdd from '~/components/App/CalculateHdd/Index.vue';
 export default {
     components: {
+        CalculateHdd,
     },
     data(){
         return {
@@ -19,7 +19,6 @@ export default {
             console.log("CREATED");
     },
     mounted(){
-            console.log("MOUNTED");
     }
 }
 </script>
