@@ -63,6 +63,7 @@ export default {
                 title
                 url
                 index
+                target
               }
               createdAt
               updatedAt

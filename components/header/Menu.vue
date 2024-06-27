@@ -6,15 +6,17 @@
                     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
                     <b-collapse id="nav-collapse" is-nav>
-                    <b-navbar-nav>
-                        <b-nav-item
-                            v-for="item in lists"
-                            :key="item.id"
-                            :href="item.url"
-                        >
-                        {{ item.title }}
-                        </b-nav-item>
-                    </b-navbar-nav>
+                        <b-navbar-nav>
+                            <b-nav-item
+                                v-for="item in lists"
+                                :key="item.id"
+                                :href="item.url"
+                                :target="item.target"
+                            >
+                                {{ item.title }}
+                            </b-nav-item>
+                        </b-navbar-nav>
+
                     <!-- Right aligned nav items -->
                     </b-collapse>
                 </b-navbar>
