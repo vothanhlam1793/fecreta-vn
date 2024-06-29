@@ -14,10 +14,10 @@
 </template>
 
 <script>
-
 import gql from 'graphql-tag';
 export default {
   components: {
+
   },
   data() {
     return {
@@ -122,12 +122,12 @@ export default {
   }
 }
             `
-    }
-  },
-  created() {
+        }
+    },
+    created(){
 
-  },
-  mounted() {
-  }
+    },
+    mounted(){
+    }
 }
 </script>
