@@ -35,7 +35,7 @@ export default {
   },
   watch: {
     products(n, o) {
-      console.log("N", n);
+      // console.log("N", n);
       this.uploadProduct();
     },
   },
@@ -86,6 +86,7 @@ export default {
       this.attributeGroups = atts;
       this.prods = products;
       this.prodFs = this.prods;
+      // console.log(this.prodFs);
     },
     updateSelect(sItems) {
       var productIds = [];
@@ -108,9 +109,9 @@ export default {
       var that = this;
       this.$apollo.query({
         query: gql`
-                query Products($branchName: String!) {
+                query{
           products(
-            filters: { branch: { name: { eq: $branchName } } }
+            filters: ${this.filter}
           ) {
             data {
               id
@@ -170,22 +171,34 @@ export default {
             }
           }
         }
-                `,
-        variables: {
-          branchName: this.branchName
-        }
-      }).then(result => {
-        that.uploadProduct(result.data.products);
-      }).catch(error => {
-        console.error('Error fetching products:', error);
-      });
+                `      }).then(result => {
+          // console.log(result.data);
+          that.uploadProduct(result.data.products);
+        }).catch(error => {
+          console.error('Error fetching products:', error);
+        });
     }
-  },
-  apollo: {
-
   },
   created() {
     this.branchName = this.$route.query.branch || ""; // Get branch query parameter
+    this.categogy = this.$route.query.categogy || "";
+    this.filter = `
+    {
+      or: [{
+        categories: {
+          name: {
+            eq: "${this.categogy}"
+          }
+        }
+      }, {
+        branch: {
+          name: {
+            eq: "${this.branchName}"
+          }
+        }
+      }]
+    }
+    `
     this.fetchProducts();
   },
   mounted() { },
