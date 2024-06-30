@@ -38,6 +38,12 @@ export default {
       // console.log("N", n);
       this.uploadProduct();
     },
+    prodFs(n, o) {
+      // console.log("PROD:", n);
+      // n.forEach(p => {
+      //   console.log("P: ", p.productAttributes);
+      // })
+    }
   },
   methods: {
     uploadProduct(n) {
@@ -86,7 +92,6 @@ export default {
       this.attributeGroups = atts;
       this.prods = products;
       this.prodFs = this.prods;
-      // console.log(this.prodFs);
     },
     updateSelect(sItems) {
       var productIds = [];
@@ -111,7 +116,8 @@ export default {
         query: gql`
                 query{
           products(
-            filters: ${this.filter}
+            filters: ${this.filter},
+            pagination: ${this.pagination}
           ) {
             data {
               id
@@ -172,7 +178,6 @@ export default {
           }
         }
                 `      }).then(result => {
-          // console.log(result.data);
           that.uploadProduct(result.data.products);
         }).catch(error => {
           console.error('Error fetching products:', error);
@@ -199,6 +204,11 @@ export default {
       }]
     }
     `
+    this.pagination = `
+    {
+      pageSize: 200
+    }
+    `;
     this.fetchProducts();
   },
   mounted() { },
