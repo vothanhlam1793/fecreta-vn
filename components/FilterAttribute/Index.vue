@@ -32,7 +32,6 @@ export default {
             Object.values(groupSlugLists).forEach(list => {
                 that.lists.push(list);
             });
-            console.log(this.sItems);
         }
     },
     data() {

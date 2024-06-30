@@ -48,7 +48,7 @@ export default {
         this.selectedItems = this.list.items.map(item => {
             return item.id;
         });
-        console.log(this.selectedItems);
+        // console.log(this.selectedItems);
     },
 }
 </script>
