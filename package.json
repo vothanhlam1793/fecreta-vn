@@ -16,6 +16,7 @@
     "bootstrap": "^4.6.2",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.25.3",
+    "lodash": "^4.17.21",
     "nuxt": "^2.15.8",
     "reconnecting-websocket": "^4.4.0",
     "uikit": "^3.18.3",
