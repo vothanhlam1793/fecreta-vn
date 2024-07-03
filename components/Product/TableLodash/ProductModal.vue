@@ -1,6 +1,11 @@
 <template>
     <div>
-        <b-modal id="modal-1" title="Thông tin sản phẩm">
+        <b-modal :id="idModal" title="Thông tin sản phẩm">
+            <template #modal-footer="{ ok, cancel }">
+                <b-button variant="primary" @click="cancel">
+                    Đóng
+                </b-button>
+            </template>
             <div class="product-info">
                 <div class="text-center">
                     <b-img :src="url_be + product.imageUrl" fluid alt="Product Image"></b-img>
@@ -41,6 +46,10 @@ export default {
         product: {
             type: Object,
             required: true
+        },
+        idModal: {
+            type: String,
+            default: "modal-1"
         }
     },
     computed: {

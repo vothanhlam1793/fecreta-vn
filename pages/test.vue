@@ -62,6 +62,15 @@ export default {
                             ),
                         };
                     }),
+                    categories: attributes.categories.data.map((category) => {
+                        return {
+                            id: category.id,
+                            name: category.attributes.name,
+                            description: category.attributes.description,
+                            slug: category.attributes.slug,
+                            type: category.attributes.type
+                        }
+                    })
                 };
             });
             return products;
@@ -97,6 +106,17 @@ export default {
                 tagProduct {
                   content
                   variant
+                }
+                categories {
+                    data {
+                        id
+                        attributes {
+                            name
+                            description
+                            slug
+                            type
+                        }
+                    }
                 }
                 product_attributes {
                   data {

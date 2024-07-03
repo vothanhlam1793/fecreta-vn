@@ -7,7 +7,6 @@
                     alt="Image 1" width="50" height="50"></b-img>
             </template>
         </b-table>
-        <ProductModal v-if="selectedProduct" :product="selectedProduct" @close="selectedProduct = null" />
     </div>
 </template>
 
@@ -24,18 +23,21 @@ export default {
         return {
             fields: [{
                 key: "image",
-                label: "Ảnh"
+                label: "Ảnh",
+                thStyle: { width: '10%' }  // Đặt chiều rộng cột theo phần trăm
             }, {
                 key: "name",
                 class: "align-middle",
-                label: "Tên sản phẩm"
+                label: "Tên sản phẩm",
+                thStyle: { width: '70%' }  // Đặt chiều rộng cột theo phần trăm
             }, {
                 key: "price",
                 class: "align-middle",
-                label: "Giá bán"
+                label: "Giá bán",
+                thStyle: { width: '20%' }  // Đặt chiều rộng cột theo phần trăm
+
             }],
-            items: [],
-            selectedProduct: null
+            items: []
         }
     },
     computed: {
@@ -48,11 +50,7 @@ export default {
     },
     methods: {
         showModal(item, index, event) {
-            this.selectedProduct = item.product;
-            var that = this;
-            setTimeout(function () {
-                that.$bvModal.show('modal-1');
-            }, 100);
+            this.$emit("showModalTable", item.product);
         }
     },
     mounted() {
